@@ -8,7 +8,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Montserrat','Inter',-apple-system,sans-serif;
-  background:#0d1117;
+  background:#1a1f2e;
   color:#e6edf3;
   line-height:1.6;
   padding:0 0 80px;
@@ -16,22 +16,34 @@ body{
   position:relative;
 }
 
-/* ДЕРЕВО НА ФОНЕ */
+/* ФОН — мягкий градиент */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse at top,rgba(200,164,92,.06) 0%,transparent 50%),
+    radial-gradient(ellipse at bottom,rgba(90,120,200,.05) 0%,transparent 50%);
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ДЕРЕВО */
 .tree-bg{
   position:fixed;
   top:0;left:50%;
-  width:900px;height:100vh;
+  width:1100px;height:100vh;
   transform:translateX(-50%);
-  z-index:0;
+  z-index:1;
   pointer-events:none;
-  opacity:.12;
+  opacity:.55;
 }
 .tree-bg svg{width:100%;height:100%}
 
 /* ШАПКА */
 .header{
   position:relative;
-  z-index:2;
+  z-index:3;
   padding:80px 20px 50px;
   text-align:center;
 }
@@ -46,6 +58,7 @@ body{
 .logo{
   width:70px;height:70px;
   flex-shrink:0;
+  filter:drop-shadow(0 0 20px rgba(200,164,92,.4));
 }
 .logo svg{width:100%;height:100%}
 .header h1{
@@ -59,7 +72,7 @@ body{
 }
 .header .subtitle{
   font-size:17px;
-  color:#8b949e;
+  color:#a8b2c4;
   font-weight:500;
   margin-bottom:28px;
 }
@@ -69,7 +82,7 @@ body{
   gap:36px;
   flex-wrap:wrap;
   font-size:14px;
-  color:#8b949e;
+  color:#a8b2c4;
 }
 .header .meta span{display:flex;align-items:center;gap:8px}
 .header .meta strong{color:#C8A45C;font-weight:700;font-size:18px}
@@ -77,7 +90,7 @@ body{
 /* ТАЙМЛАЙН */
 .timeline{
   position:relative;
-  z-index:2;
+  z-index:3;
   max-width:780px;
   margin:40px auto 0;
   padding:0 24px;
@@ -87,20 +100,20 @@ body{
   position:absolute;
   left:50%;top:0;bottom:0;
   width:2px;
-  background:linear-gradient(180deg,transparent 0%,#21262d 3%,#21262d 97%,transparent 100%);
+  background:linear-gradient(180deg,transparent 0%,rgba(200,164,92,.3) 3%,rgba(200,164,92,.3) 97%,transparent 100%);
   transform:translateX(-50%);
 }
 
 /* БЛОКИ */
 .block{
   position:relative;
-  background:rgba(22,27,34,.92);
-  backdrop-filter:blur(8px);
-  border:1px solid #21262d;
+  background:#252b3d;
+  border:1px solid #323a52;
   border-radius:16px;
   padding:24px 28px;
   margin-bottom:28px;
   transition:all .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
 }
 .block::before{
   content:'';
@@ -114,9 +127,9 @@ body{
 }
 .block:hover{
   transform:translateY(-4px);
-  border-color:#30363d;
-  box-shadow:0 12px 40px rgba(0,0,0,.6),0 0 0 1px rgba(200,164,92,.2);
-  background:rgba(28,33,40,.95);
+  border-color:rgba(200,164,92,.5);
+  box-shadow:0 12px 40px rgba(0,0,0,.5),0 0 0 1px rgba(200,164,92,.3),0 0 30px rgba(200,164,92,.15);
+  background:#2b3247;
 }
 .block:hover::before{opacity:1}
 
@@ -124,8 +137,8 @@ body{
   display:inline-block;
   font-size:13px;font-weight:700;
   color:#C8A45C;
-  background:rgba(200,164,92,.1);
-  border:1px solid rgba(200,164,92,.25);
+  background:rgba(200,164,92,.12);
+  border:1px solid rgba(200,164,92,.3);
   padding:4px 12px;
   border-radius:20px;
   margin-bottom:12px;
@@ -133,19 +146,19 @@ body{
 }
 .block h3{
   font-size:20px;font-weight:700;
-  color:#e6edf3;
+  color:#f0f3f8;
   margin-bottom:14px;
   letter-spacing:-.3px;
 }
 .block p{
   font-size:15px;
-  color:#8b949e;
+  color:#a8b2c4;
   line-height:1.7;
 }
-.block p strong{color:#c9d1d9;font-weight:600}
+.block p strong{color:#e6edf3;font-weight:600}
 .block .divider{
   height:1px;
-  background:linear-gradient(90deg,transparent,#21262d,transparent);
+  background:linear-gradient(90deg,transparent,#3a4359,transparent);
   margin:16px 0;
 }
 
@@ -154,36 +167,42 @@ body{
   border-left:3px solid #C8A45C;
   border-radius:0 16px 16px 0;
   margin-left:32px;
-  background:rgba(13,17,23,.92);
+  background:#20263a;
 }
 .block.branch::before{display:none}
 .block.branch h3{font-size:16px;color:#C8A45C}
 .block.branch p{font-size:14px}
 
-/* СТРЕЛКИ */
+/* СТРЕЛКИ — золотые */
 .arrow{
   text-align:center;
-  color:#30363d;
-  font-size:22px;
+  color:#C8A45C;
+  font-size:26px;
   margin:-14px 0 14px;
   position:relative;
-  z-index:2;
+  z-index:3;
+  text-shadow:0 0 12px rgba(200,164,92,.6);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:.7}
+  50%{opacity:1}
 }
 
 /* ФУТЕР */
 .footer{
   position:relative;
-  z-index:2;
+  z-index:3;
   text-align:center;
   padding:60px 20px 40px;
-  color:#484f58;
+  color:#6b7690;
   font-size:13px;
   margin-top:80px;
 }
 .footer strong{color:#C8A45C}
 
 @media(max-width:768px){
-  .tree-bg{width:500px;opacity:.08}
+  .tree-bg{width:600px;opacity:.4}
   .header{padding:50px 16px 36px}
   .logo{width:50px;height:50px}
   .header h1{font-size:26px}
@@ -204,55 +223,73 @@ body{
 
 <!-- ДЕРЕВО -->
 <div class="tree-bg">
-<svg viewBox="0 0 900 1200" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 1100 1400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
   <defs>
     <radialGradient id="fruit" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#C8A45C" stop-opacity="1"/>
+      <stop offset="0%" stop-color="#FFD97A" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#C8A45C" stop-opacity=".8"/>
       <stop offset="100%" stop-color="#C8A45C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="leaf" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4a5568" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#2d3548" stop-opacity=".3"/>
     </radialGradient>
   </defs>
 
   <!-- Ствол -->
-  <path d="M450 1200 Q440 1000 435 850 Q430 700 445 550 Q455 400 450 250"
-        stroke="#4a5568" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <path d="M550 1400 Q545 1150 540 950 Q535 750 555 550 Q565 380 550 200"
+        stroke="#3a4359" stroke-width="38" fill="none" stroke-linecap="round"/>
+  <!-- Текстура ствола -->
+  <path d="M540 1300 Q535 1100 542 900 Q548 700 555 500"
+        stroke="#4a5568" stroke-width="3" fill="none" opacity=".4"/>
+  <path d="M560 1250 Q558 1050 550 850 Q545 650 552 450"
+        stroke="#4a5568" stroke-width="3" fill="none" opacity=".4"/>
 
   <!-- Корни -->
-  <path d="M435 850 Q380 950 340 1100" stroke="#4a5568" stroke-width="16" fill="none" stroke-linecap="round"/>
-  <path d="M445 870 Q510 970 560 1120" stroke="#4a5568" stroke-width="16" fill="none" stroke-linecap="round"/>
-  <path d="M440 900 Q400 1050 380 1180" stroke="#4a5568" stroke-width="10" fill="none" stroke-linecap="round"/>
-  <path d="M450 910 Q500 1060 530 1180" stroke="#4a5568" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M540 1000 Q470 1120 400 1300" stroke="#3a4359" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M555 1020 Q630 1140 700 1320" stroke="#3a4359" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M545 1050 Q490 1200 460 1350" stroke="#3a4359" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M555 1060 Q620 1220 650 1350" stroke="#3a4359" stroke-width="12" fill="none" stroke-linecap="round"/>
 
-  <!-- Основные ветви -->
-  <path d="M450 600 Q300 500 180 400" stroke="#4a5568" stroke-width="18" fill="none" stroke-linecap="round"/>
-  <path d="M450 550 Q600 450 720 350" stroke="#4a5568" stroke-width="18" fill="none" stroke-linecap="round"/>
-  <path d="M448 450 Q350 320 250 220" stroke="#4a5568" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <path d="M450 420 Q550 300 650 200" stroke="#4a5568" stroke-width="14" fill="none" stroke-linecap="round"/>
-  <path d="M450 350 Q420 200 400 100" stroke="#4a5568" stroke-width="12" fill="none" stroke-linecap="round"/>
-  <path d="M450 330 Q520 180 580 80" stroke="#4a5568" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <!-- Ветви, уходящие в крону -->
+  <path d="M550 600 Q400 480 280 380" stroke="#3a4359" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M550 560 Q700 440 820 340" stroke="#3a4359" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M548 450 Q430 320 330 220" stroke="#3a4359" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M552 430 Q680 300 780 200" stroke="#3a4359" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M550 340 Q500 200 470 80" stroke="#3a4359" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M550 320 Q620 180 680 60" stroke="#3a4359" stroke-width="14" fill="none" stroke-linecap="round"/>
 
-  <!-- Мелкие ветви -->
-  <path d="M300 500 Q240 450 200 380" stroke="#4a5568" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <path d="M600 450 Q660 400 700 330" stroke="#4a5568" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <path d="M250 220 Q200 180 150 150" stroke="#4a5568" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M650 200 Q700 160 750 130" stroke="#4a5568" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M400 100 Q370 60 340 30" stroke="#4a5568" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <path d="M580 80 Q610 40 640 10" stroke="#4a5568" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- КРОНА — облака листвы -->
+  <ellipse cx="300" cy="320" rx="180" ry="120" fill="url(#leaf)"/>
+  <ellipse cx="800" cy="280" rx="200" ry="130" fill="url(#leaf)"/>
+  <ellipse cx="200" cy="200" rx="150" ry="100" fill="url(#leaf)"/>
+  <ellipse cx="900" cy="180" rx="160" ry="100" fill="url(#leaf)"/>
+  <ellipse cx="400" cy="150" rx="180" ry="110" fill="url(#leaf)"/>
+  <ellipse cx="700" cy="120" rx="180" ry="110" fill="url(#leaf)"/>
+  <ellipse cx="550" cy="80" rx="220" ry="120" fill="url(#leaf)"/>
+  <ellipse cx="280" cy="420" rx="140" ry="90" fill="url(#leaf)"/>
+  <ellipse cx="820" cy="400" rx="150" ry="95" fill="url(#leaf)"/>
 
-  <!-- Плоды (золотые точки) -->
-  <circle cx="180" cy="400" r="14" fill="url(#fruit)"/>
-  <circle cx="250" cy="220" r="14" fill="url(#fruit)"/>
-  <circle cx="400" cy="100" r="14" fill="url(#fruit)"/>
-  <circle cx="580" cy="80" r="14" fill="url(#fruit)"/>
-  <circle cx="720" cy="350" r="14" fill="url(#fruit)"/>
-  <circle cx="650" cy="200" r="14" fill="url(#fruit)"/>
-  <circle cx="300" cy="500" r="12" fill="url(#fruit)"/>
-  <circle cx="600" cy="450" r="12" fill="url(#fruit)"/>
-  <circle cx="200" cy="380" r="10" fill="url(#fruit)"/>
-  <circle cx="700" cy="330" r="10" fill="url(#fruit)"/>
-  <circle cx="150" cy="150" r="10" fill="url(#fruit)"/>
-  <circle cx="750" cy="130" r="10" fill="url(#fruit)"/>
-  <circle cx="340" cy="30" r="8" fill="url(#fruit)"/>
-  <circle cx="640" cy="10" r="8" fill="url(#fruit)"/>
+  <!-- ПЛОДЫ — золотые -->
+  <circle cx="280" cy="380" r="18" fill="url(#fruit)"/>
+  <circle cx="820" cy="340" r="18" fill="url(#fruit)"/>
+  <circle cx="330" cy="220" r="16" fill="url(#fruit)"/>
+  <circle cx="780" cy="200" r="16" fill="url(#fruit)"/>
+  <circle cx="470" cy="80" r="16" fill="url(#fruit)"/>
+  <circle cx="680" cy="60" r="16" fill="url(#fruit)"/>
+  <circle cx="200" cy="200" r="14" fill="url(#fruit)"/>
+  <circle cx="900" cy="180" r="14" fill="url(#fruit)"/>
+  <circle cx="400" cy="150" r="16" fill="url(#fruit)"/>
+  <circle cx="700" cy="120" r="16" fill="url(#fruit)"/>
+  <circle cx="550" cy="80" r="18" fill="url(#fruit)"/>
+  <circle cx="280" cy="420" r="14" fill="url(#fruit)"/>
+  <circle cx="820" cy="400" r="14" fill="url(#fruit)"/>
+  <circle cx="150" cy="260" r="12" fill="url(#fruit)"/>
+  <circle cx="950" cy="240" r="12" fill="url(#fruit)"/>
+  <circle cx="500" cy="180" r="12" fill="url(#fruit)"/>
+  <circle cx="620" cy="160" r="12" fill="url(#fruit)"/>
+  <circle cx="380" cy="280" r="12" fill="url(#fruit)"/>
+  <circle cx="720" cy="260" r="12" fill="url(#fruit)"/>
 </svg>
 </div>
 
